@@ -18,7 +18,7 @@ RSpec.describe DockingStation do
   end
 
   it "raises an error if dock is full" do
-    subject.dock("old broken bike")
+    20.times { subject.dock Bike.new }
     expect{subject.dock("shiny new bike")}.to raise_error(RuntimeError)
   end
 end
