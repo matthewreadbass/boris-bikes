@@ -21,4 +21,14 @@ RSpec.describe DockingStation do
     20.times { subject.dock Bike.new }
     expect{subject.dock("shiny new bike")}.to raise_error(RuntimeError)
   end
+
+  it "returns true if full" do
+    20.times { subject.dock Bike.new }
+    expect(subject.full?).to eq true
+  end
+
+  it "returns false if space available" do
+    expect(subject.full?).to eq false
+  end
+
 end
