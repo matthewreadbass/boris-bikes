@@ -8,19 +8,17 @@ RSpec.describe DockingStation do
   end
 
   it "returned docked bikes" do
-    bike = Bike.new
-    subject.dock(bike)
-    expect(subject.bike).to eq bike
+    expect(subject.dock("shiny new bike")).to eq (["shiny new bike"])
   end
 
   it {is_expected.to respond_to(:bike)}
-
-  it "raises an error - bike_available?" do
-    expect {subject.bike_available?}.to raise_error(NoMethodError)
-  end
 
   it "raises an error - release_bike" do
     expect{subject.release_bike}.to raise_error(RuntimeError)
   end
 
+  it "raises an error if dock is full" do
+    subject.dock("old broken bike")
+    expect{subject.dock("shiny new bike")}.to raise_error(RuntimeError)
+  end
 end
